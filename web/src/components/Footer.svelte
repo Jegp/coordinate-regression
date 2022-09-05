@@ -1,18 +1,35 @@
 <script>
 	const links = [
-		{ name: "about", url: "https://jepedersen.dk/about", icon: "fa-solid fa-house" },
-		{ name: "twitter", url: "https://twitter.com/jensegholm/", icon: "fab fa-twitter" },
-		{ name: "GitHub", url: "https://github.com/jegp/coordinate-regression/", icon: "fab fa-github" },
+		{
+			name: "about",
+			url: "https://jepedersen.dk/about",
+			icon: "fa-solid fa-house"
+		},
+		{
+			name: "twitter",
+			url: "https://twitter.com/jensegholm/",
+			icon: "fab fa-twitter"
+		},
+		{
+			name: "GitHub",
+			url: "https://github.com/jegp/coordinate-regression/",
+			icon: "fab fa-github"
+		}
 	];
 </script>
 
 <footer>
 	<section class="about">
 		<p>
-			<a href="https://jepedersen.dk">Jens Egholm Pedersen</a>
-			is a doctoral researcher at the
-			<a href="https://neurocomputing.systems">Neurocomputing Systems lab</a>.
+			This website was developed by <a href="https://jepedersen.dk"
+				>Jens Egholm Pedersen</a
+			>
+			who is studying at the
+			<a href="https://neurocomputing.systems">Neurocomputing Systems lab</a>
+			at the <a href="https://kth.se">KTH Royal Institute of Technology</a> in Stockholm,
+			Sweden.
 		</p>
+		<p>The work is licensed under LGPLv3.</p>
 	</section>
 
 	<section class="links">
@@ -20,7 +37,7 @@
 			{#each links as link}
 				<li>
 					<a href={link.url}>
-						<span><i class="{link.icon}"></i> {link.name.toUpperCase()}</span>
+						<span><i class={link.icon} /> {link.name.toUpperCase()}</span>
 					</a>
 				</li>
 			{/each}
