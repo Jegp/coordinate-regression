@@ -6,13 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-security-policy" content=""><title>Coordinate Regression for event-based vision</title><meta name="description" content="Coordinate regression for event-based vision" data-svelte="svelte-11pdboy"><meta name="author" content="Jens E. Pedersen" data-svelte="svelte-11pdboy"><meta name="news_keywords" content="event-based vision, spiking neural networks, machine learning" data-svelte="svelte-11pdboy"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-11pdboy"><meta name="twitter:site" content="https://jegp.github.io/coordinate-regression" data-svelte="svelte-11pdboy"><meta name="twitter:creator" content="@jensegholm" data-svelte="svelte-11pdboy"><meta name="twitter:title" content="Coordinate Regression for event-based vision" data-svelte="svelte-11pdboy"><meta name="twitter:description" content="Coordinate regression for event-based vision" data-svelte="svelte-11pdboy"><meta name="twitter:image:src" content="https://jegp.github.io/coordinate-regression/assets/social-twitter.jpg" data-svelte="svelte-11pdboy"><meta name="robots" content="max-image-preview:large" data-svelte="svelte-11pdboy"><link rel="canonical" href="https://jegp.github.io/coordinate-regression/" data-svelte="svelte-11pdboy"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" data-svelte="svelte-11pdboy">
-	<link href="/coordinate-regression/_app/immutable/assets/+layout-a07d47d0.css" rel="stylesheet">
-	<link href="/coordinate-regression/_app/immutable/assets/+page-c219a619.css" rel="stylesheet">
-	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/start-25af102b.js">
-	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/chunks/index-ed6c254a.js">
+	<link href="/coordinate-regression/_app/immutable/assets/+layout-8f49c887.css" rel="stylesheet">
+	<link href="/coordinate-regression/_app/immutable/assets/+page-e7a251c6.css" rel="stylesheet">
+	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/start-452033d5.js">
+	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/chunks/index-2a41cd7a.js">
 	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/chunks/paths-6cd3a76e.js">
-	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/components/pages/_layout.svelte-e5b225e8.js">
-	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/components/pages/_page.svelte-c2ee1f1d.js">
+	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/components/pages/_layout.svelte-73e4c1df.js">
+	<link rel="modulepreload" href="/coordinate-regression/_app/immutable/components/pages/_page.svelte-3983c5a7.js">
 </head>
 
 <body>
@@ -20,17 +20,171 @@
 	<div>
 
 
-<header class="svelte-4li83a"><div class="banner svelte-4li83a"><h1 class="svelte-4li83a"><a href="#content" class="svelte-4li83a">Coordinate regression for event-based vision</a></h1></div>
-</header>
+<header class="svelte-46qox3"></header>
 <main id="content">
-<content><div class="black svelte-qqsl2c"></div>
-	<h1>Coming soon ...</h1>
+<content class="svelte-zqxcjm"><div class="head svelte-zqxcjm"><video class="background svelte-zqxcjm" autoplay loop><source src="2209_event_video.mp4" type="video/mp4"><source src="2209_event_video.webm" type="video/webm"></video>
+		<div class="hover svelte-zqxcjm"><h1 class="svelte-zqxcjm">Coordinate regression for event-based vision</h1>
+			<div class="box svelte-zqxcjm"><div class="author svelte-zqxcjm">Authors: <a href="https://jepedersen.dk" class="svelte-zqxcjm">Jens E. Pedersen</a>, J. P.
+					Romero. B, &amp; J. Conradt
+					<br>
+					Contact: <i class="fa fa-envelope"></i>
+					<a href="mailto:jeped@kth.se" class="svelte-zqxcjm">jeped@kth.se</a>
+					- <i class="fab fa-twitter"></i>
+					<a href="https://twitter.com/jensegholm" class="svelte-zqxcjm">@jensegholm</a>
+					- <i class="fab fa-github"></i>
+					<a href="https://github.com/jegp/coordinate-regression" class="svelte-zqxcjm">github.com/jegp/coordinate-regression</a></div>
+				<br>
+				We present a novel method to predict translation-invariant spatial coordinates
+				from sparse, event-based vision (EBV) signals using a fully-spiking convolutional
+				neural network (SCNN).
+			</div>
+
+			<div class="box svelte-zqxcjm"><h2>The problem: predicting coordinates with sparse events</h2>
+				<p>The video playing in the background illustrates the sparseness of
+					event-based vision (EBV) cameras. Most pixels are completely empty
+					(~95%), because EBV cameras work by detecting <b>luminosity changes over time</b>. For conventional artificial neural networks this is a challenge.
+					Partly because the signal is sparse and
+					<i>requires integration over time</i>
+					(recurrence) to form coherent &quot;pictures&quot; of objects, and partly because
+					conventional hardware struggles to keep up with EBV cameras sending more
+					than 20M events per second.
+				</p>
+				<p>Our work here focuses on coordinate regression for event-based data,
+					aiming to
+					<b>predict center coordinates of geometric shapes</b> using
+					<b>spiking neural neural networks</b>, designed for
+					<b>neuromorphic hardware</b>.
+				</p>
+
+				<h2>Results: LIF beats ReLU</h2>
+				<p>In our setting, a biologically inspired spiking neural network (SNN)
+					with receptive fields (RF) outperform conventional convolutional
+					artificial neural network (ANN). The plot below shows the pixel-wise
+					error for predictions against unseen validation data for four
+					different models.
+				</p>
+				<img src="pred_horiz.png"></div></div></div>
+
+	<div class="block svelte-zqxcjm"><div class="section svelte-zqxcjm"><h2>Why spiking neural networks?</h2>
+			<p>Spiking neural networks (SNNs) and neuromorphic hardware are inherently
+				parallel, asynchronous, low-energy devices that promise accelerated
+				compute capacities for event-based machine learning systems. This work
+				addresses coordinate regression using an inherently asynchronous and
+				parallel spiking architecture that is both compatible with neuromorphic
+				hardware, and, we hope, <b>a step towards more useful neuromorphic algorithms</b>.
+			</p></div>
+
+		<div class="section svelte-zqxcjm"><h2>The task: event-based dataset</h2>
+			<p>We construted a dataset of geometric shapes (circles, triangles,
+				squares) with center coordinate labels. To provide realistic, structured
+				noise, we superimposed the sparse shapes on office-like scene renderings
+				from the
+				<a href="https://neurorobotics.net/">NeuroRobotics Platform (NRP)</a>.
+				The shapes are sparsely sampled from a Bernouilli distribution (p=0.8)
+				and are moving around with a brownian motion. The task is for any
+				network to recognize the shapes and predict their center as accurately
+				as possible.
+			</p>
+			<p>We chose the geometric shapes as a means to control parameters such as
+				shape velocity, event density, and shape complexity. For instance, the
+				current shapes have a radius of 80 pixels, which is too large for any
+				single kernel to learn. The convolutional layer is, therefore, forced to
+				specialize on partial features to correctly solve the task.
+			</p>
+			<center><img src="fig1_color.png" style="width: 30%;" class="svelte-zqxcjm">
+				<img src="fig1_circle.png" style="width: 30%;" class="svelte-zqxcjm"></center>
+			<p>In total, the dataset contains 2000 videos of 60 frames each (resembling 1ms of events) with a resolution of 640x480.
+			</p></div>
+		<div class="section svelte-zqxcjm"><h2>Neural network architecture</h2>
+			<p>We use a classical convolutional model consisting of two convolutional
+				layers, followed by an inverse convolution for a slight upsampling. We
+				implemented a differentiable coordinate transform (DCT) layer to
+				transform the pixel-wise activations into a 2-dimensional coordinate.
+				Each convolution is interspersed with non-linear activations, batch
+				normalization and dropout (p=0.1).
+			</p>
+
+			<center><img src="net.png" style="width: 80%;" class="svelte-zqxcjm"></center></div>
+
+		<div class="section svelte-zqxcjm"><h2>Translation-invariant receptive fields</h2>
+			<p>Similar to conventional convolutional systems, we can define receptive
+				field kernels for spiking neural networks. Importantly, we wish to
+				retain translation-invariant properties to capture the moving shapes
+				over time, as neatly illustrates in the work by <a href="https://www.sciencedirect.com/science/article/pii/S2405844021000025">[Lindeberg 2021]</a>.
+			</p>
+			<center><img src="fig_rf.png" style="width:60%;" class="svelte-zqxcjm"></center>
+			<p>Preconfiguring the receptive field kernels for the spiking neural
+				networks significantly reduces training time, memory consumption, and
+				ability for the network to generalize, as seen in the loss curves above.
+			</p></div>
+
+		<div class="section svelte-zqxcjm"><h2>Training and validation</h2>
+			<p>We constructed and trained four independent networks over the same
+				architecture
+				</p>
+			<ol><li>a non-spiking network where ReLU units constitute the
+				nonlinearities (ANN)</li>
+				<li>a non-spiking network with custom receptive field kernels (ANN-RF)</li>
+				<li>a spiking version, with three leaky integrate-and-fire (LIF)
+				nonlinearities feeding a final, non-spiking leaky integrator (SNN)</li>
+				<li>a
+				spiking version, resembling (3), but where custom receptive field
+				kernels promote translation-invariant feature recognition (SNN-RF)</li></ol>
+			<p>The networks were trained with backpropagation-through-time using a regular
+				l<sup>2</sup>-loss via the differentiable coordinate transform (DCT)
+				method (presented futher below). The models are tested on unseen
+				validation data (20% of the total training data).
+			</p></div>
+
+		<div class="section svelte-zqxcjm"><h2>Prediction errors and performance</h2>
+			<center><img src="fig_loss2.png" style="width: 80%;" class="svelte-zqxcjm"></center>
+			<p>The receptive field version of the SNN outperforms even the artificial
+				neural network. If we further explore the prediction errors of the
+				models (sampled over the entire validation dataset), the performance
+				benefit becomes clearer: the predicted coordinates from the receptive
+				field model is significantly closer to the actual, labelled coordinates.
+			</p>
+			<center><img src="pred_horiz.png" class="svelte-zqxcjm"></center></div>
+
+		<div class="section svelte-zqxcjm"><h2>Future work</h2>
+			<p>This is still work in progress and more work is needed to generalize the results.
+				However, there are already a few extensions that would immediately be interesting to explore
+			</p>
+			<ol><li>The gaussian structure of the output predictions can be exploited to
+					further increase prediction accuracy.
+				</li>
+				<li>The current shapes are quite dense (Bernouilli p=0.8), such that the artificial networks
+					are able to converge to the shapes in the given frames. We wish to
+					explore the sparseness of the shapes (lower the Bernouilli
+					distribution of the shapes) while exploring the temporal process of
+					recurrent artificial (non-spiking) networks.
+				</li>
+				<li>We currently focus on translation-invariance. We wish to extend our
+					method to more complex shapes that require both scale- and
+					rotation-invariance.
+				</li></ol></div>
+		<div class="box author svelte-zqxcjm"><h2>Acknowledgements</h2>
+			Thank you to all the people in the
+			<a href="https://neurocomputing.systems" class="svelte-zqxcjm">Neurocomputing Systems Lab</a>.
+			at
+			<a href="https://kth.se" class="svelte-zqxcjm">KTH Royal Institute of Technology</a>, where this
+			work was done. We graciously acknowledge the funding we received from the
+			<a href="https://www.humanbrainproject.eu/" class="svelte-zqxcjm">Human Brain Project</a>. We
+			also owe a debt of gratitude to the
+			<a href="https://www.aicentre.dk/" class="svelte-zqxcjm">Copenhagen AI Pioneer Centre</a>.
+			<br>
+			<center><a class="borderless svelte-zqxcjm" href="https://neurocomputing.systems"><img src="ncs.png" class="svelte-zqxcjm"></a>
+				<a class="borderless svelte-zqxcjm" href="https://humanbrainproject.eu"><img src="hbp.png" class="svelte-zqxcjm"></a>
+				<a class="borderless svelte-zqxcjm" href="https://kth.se"><img src="kth.png" class="svelte-zqxcjm"></a></center></div></div>
 </content>
 
-<footer class="svelte-1pc98p8"><section class="about svelte-1pc98p8"><p><a href="https://jepedersen.dk" class="svelte-1pc98p8">Jens Egholm Pedersen</a>
-			is a doctoral researcher at the
-			<a href="https://neurocomputing.systems" class="svelte-1pc98p8">Neurocomputing Systems lab</a>.
-		</p></section>
+<footer class="svelte-1pc98p8"><section class="about svelte-1pc98p8"><p>This website was developed by <a href="https://jepedersen.dk" class="svelte-1pc98p8">Jens Egholm Pedersen</a>
+			who is studying at the
+			<a href="https://neurocomputing.systems" class="svelte-1pc98p8">Neurocomputing Systems lab</a>
+			at the <a href="https://kth.se" class="svelte-1pc98p8">KTH Royal Institute of Technology</a> in Stockholm,
+			Sweden.
+		</p>
+		<p>The work is licensed under LGPLv3.</p></section>
 
 	<section class="links svelte-1pc98p8"><ul class="svelte-1pc98p8"><li class="svelte-1pc98p8"><a href="https://jepedersen.dk/about" class="svelte-1pc98p8"><span class="svelte-1pc98p8"><i class="fa-solid fa-house svelte-1pc98p8"></i> ABOUT</span></a>
 				</li><li class="svelte-1pc98p8"><a href="https://twitter.com/jensegholm/" class="svelte-1pc98p8"><span class="svelte-1pc98p8"><i class="fab fa-twitter svelte-1pc98p8"></i> TWITTER</span></a>
@@ -39,13 +193,13 @@
 </footer></main>
 
 
-		<script type="module" data-sveltekit-hydrate="1ba5w1b">
-		import { set_public_env, start } from "/coordinate-regression/_app/immutable/start-25af102b.js";
+		<script type="module" data-sveltekit-hydrate="fmjtnr">
+		import { set_public_env, start } from "/coordinate-regression/_app/immutable/start-452033d5.js";
 
 		set_public_env({});
 
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="1ba5w1b"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="fmjtnr"]').parentNode,
 			paths: {"base":"/coordinate-regression","assets":"/coordinate-regression"},
 			route: true,
 			spa: false,
