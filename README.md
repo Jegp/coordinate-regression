@@ -11,7 +11,7 @@ Specifically, we contribute:
 
 All work here can be reproduced as follows
 
-1. Download the dataset available at X
+1. Download the dataset by contacting the author (will be uploaded soon)
 2. Ensure you have a Python installation with [PyTorch](https://pytorch.org) and [Norse](https://github.com/norse/norse) installed.
    1. After installing the necessary PyTorch version, you can install the dependencies from the `requirements.txt`-file by typing: `pip install -r requirements.txt`
 3. Run the `learn_shapes.py` file to train the model
