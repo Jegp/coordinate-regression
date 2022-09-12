@@ -9,12 +9,15 @@ Specifically, we contribute:
 
 ## Usage
 
-All work here can be reproduced as follows
+To train the models, follow the below steps
 
-1. Download the dataset by contacting the author (will be uploaded soon)
+1. [Download the dataset via this link](https://kth-my.sharepoint.com/:u:/g/personal/jeped_ug_kth_se/EZS0BB9N5AlAo9uB9aq0ssYB1bnFNO7JDfv1LpQTqGAy7w?e=DoFiJZ) and unpack it to a folder you can recall, say `/tmp/eventdata`.
 2. Ensure you have a Python installation with [PyTorch](https://pytorch.org) and [Norse](https://github.com/norse/norse) installed.
-   1. After installing the necessary PyTorch version, you can install the dependencies from the `requirements.txt`-file by typing: `pip install -r requirements.txt`
-3. Run the `learn_shapes.py` file to train the model
+   * After installing the necessary PyTorch version, you can install the dependencies from the `requirements.txt`-file by typing: `pip install -r requirements.txt`
+3. Enter the `coordinate-regression` folder and run the `learn_shapes.py` file with the dataset directory and model type to start training
+   * As an example, run `python learn_shapes.py --data_root=/tmp/eventdata --model=snn`
+     * Four models are available: `ann`, `annsf`, `snn`, and `snnrf`
+     * For training parameter descriptions and help, type `python learn_shapes.py --help`
 
 ## Authors and Contact
 
