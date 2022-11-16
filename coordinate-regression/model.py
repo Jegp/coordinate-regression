@@ -163,7 +163,7 @@ class ShapesSNNLayer(torch.nn.Module):
         block = [
             torch.nn.Conv2d(c_in, c_out, kernel_size, bias=False, **kwargs),
             torch.nn.BatchNorm2d(c_out),
-            norse.LIFCell(p=p),
+            norse.LIFBlockCell(p=p),
             torch.nn.Dropout(0.1),
         ]
         block[1].bias = None
