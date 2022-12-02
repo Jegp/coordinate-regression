@@ -51,7 +51,7 @@ class ANN(torch.nn.Module):
             norse.Lift(torch.nn.ReLU()),
             torch.nn.Dropout(0.2),
         )
-        self.out_shape = (165, 125)
+        self.out_shape = (69, 69)
         self.spikes = None
 
     def forward(self, x, s=None):
@@ -152,7 +152,7 @@ class ShapesSNNLayer(torch.nn.Module):
     ):
         super().__init__()
         self.shapes = [(320, 240), (160, 120), (160, 120)]
-        self.out_shape = (168, 128)
+        self.out_shape = (129, 129)
 
         # Set kernels
         if isinstance(kernels, int):
@@ -218,7 +218,7 @@ class ShapesSNNLayer(torch.nn.Module):
     ):
         super().__init__()
         self.shapes = [(128, 128), (128, 128), (128, 128)]
-        self.out_shape = (136, 136)
+        self.out_shape = (129, 129)
 
         # Set kernels
         if isinstance(kernels, int):
