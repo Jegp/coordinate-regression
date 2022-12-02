@@ -54,8 +54,9 @@ class ShapesModel(pl.LightningModule):
         kernels = (40, 20, 3)
         if net == "ann":
             self.net = ANN(kernels=kernels, classes=classes)
-        elif net == "annrf":
-            self.net = ANNRF(rings_file="rings_20.dat", classes=classes)
+        elif net.startswith("annrf"):
+            rf_file = net[-1]
+            self.net = ANNRF(rf_file=f"rings_scale{rf_file}.dat", classes=classes)
         elif net == "snn":
             self.net = ShapesSNNLayer(
                 p_li,
@@ -64,9 +65,9 @@ class ShapesModel(pl.LightningModule):
                 classes=classes,
                 learn_parameters=learn_parameters,
             )
-        elif net == "snnrf":
-            self.net = ShapesSNNRFLayer(p_li, p_lif, "rings_20.dat", classes=classes)
-        
+        elif net.startswith("snnrf"):
+            rf_file = net[-1]
+            self.net = ShapesSNNRFLayer(p_li, p_lif, f"rings_scale{rf_file}.dat", classes=classes)
         else:
             raise ValueError("Unknown network type " + net)
 
@@ -117,7 +118,7 @@ class ShapesModel(pl.LightningModule):
             "--coordinate",
             type=str,
             choices=["dsnt", "dsntli", "pixel"],
-            default="dsntli",
+            default="dsnt",
             help="Method to reduce 2d surface to coordinate",
         )
         parser.add_argument(
@@ -336,13 +337,13 @@ def main(args):
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
-    parser.add_argument("--data_root", type=str, help="Path to event-based shape dataset")
+    parser.add_argument("data_root", type=str, help="Location of the dataset to use for training and testing")
     parser.add_argument("--timesteps", type=int, default=40)
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--warmup", type=int, default=20)
     parser.add_argument(
         "--mode",
-        default="single",
+        default="default",
         choices=["default", "single", "single_triangle", "single_triangle_top"],
     )
     parser.add_argument("--network_delay", type=int, default=1)
