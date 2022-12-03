@@ -55,11 +55,7 @@ class ANN(torch.nn.Module):
             (torch.nn.ReLU()),
             torch.nn.Dropout(0.2),
         )
-<<<<<<< HEAD
-        self.out_shape = (69, 69)
-=======
         self.out_shape = (136, 136)
->>>>>>> 6492a34 (Fixed shapes)
         self.spikes = None
 
     def forward(self, x, s=None):
