@@ -106,7 +106,6 @@ class ShapesModel(pl.LightningModule):
             "--net",
             type=str,
             default="ann",
-            choices=["ann", "annrf1", "annrf3", "snn", "snnrf1", "snnrf3"],
         )
         parser.add_argument(
             "--rectification",
