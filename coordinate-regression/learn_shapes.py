@@ -8,8 +8,8 @@ import norse.torch as norse
 import pytorch_lightning as pl
 
 import shape_dataset
-from .model import *
-from .loss import *
+from model import *
+from loss import *
 
 
 class ShapesModel(pl.LightningModule):
@@ -322,7 +322,6 @@ def train(args, callbacks=[]):
         logger=logger,
         max_epochs=args.max_epochs,
         callbacks=callbacks,
-        enable_progress_bar=not args.tune,
     )
     device = trainer.strategy.root_device
     model = ShapesModel(device=device, **vars(args))
