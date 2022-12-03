@@ -39,7 +39,7 @@ class ANN(torch.nn.Module):
             k1, k2, k3 = kernels
 
         self.module = norse.Lift(torch.nn.Sequential(
-            torch.nn.Conv2d(1, k1, 9, bias=False, padding=4, stride=2)),
+            torch.nn.Conv2d(1, k1, 9, bias=False, padding=4, stride=2),
             (torch.nn.BatchNorm2d(k1)),
             (torch.nn.ReLU()),
             torch.nn.Dropout(0.1),
@@ -53,7 +53,7 @@ class ANN(torch.nn.Module):
             torch.nn.Dropout(0.1),
             (torch.nn.ConvTranspose2d(k3, classes, 9, bias=False)),
             (torch.nn.ReLU()),
-            torch.nn.Dropout(0.2),
+            torch.nn.Dropout(0.2),)
         )
         self.out_shape = (136, 136)
         self.spikes = None
