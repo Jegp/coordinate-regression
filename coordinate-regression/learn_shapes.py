@@ -67,7 +67,9 @@ class ShapesModel(pl.LightningModule):
             )
         elif net.startswith("snnrf"):
             rf_file = net[-1]
-            self.net = ShapesSNNRFLayer(p_li, p_lif, f"rings_scale{rf_file}.dat", classes=classes)
+            self.net = ShapesSNNRFLayer(
+                p_li, p_lif, f"rings_scale{rf_file}.dat", classes=classes
+            )
         else:
             raise ValueError("Unknown network type " + net)
 
@@ -80,7 +82,7 @@ class ShapesModel(pl.LightningModule):
             self.rectification = torch.nn.ReLU()
         else:
             self.rectification = torch.nn.Identity()
-        
+
         # Coordinate
         if coordinate == "dsnt":
             self.coordinate = DSNT(self.net.out_shape)
@@ -102,11 +104,7 @@ class ShapesModel(pl.LightningModule):
     @staticmethod
     def add_model_specific_args(parent_parser):
         parser = parent_parser.add_argument_group("Network Model")
-        parser.add_argument(
-            "--net",
-            type=str,
-            default="ann",
-        )
+        parser.add_argument("--net", type=str, default="ann")
         parser.add_argument(
             "--rectification",
             type=str,
@@ -220,7 +218,7 @@ class ShapesModel(pl.LightningModule):
         warmup, x, y_co, y_co_norm, y_im = self.extract_batch(batch)
         out, out_co = self.forward(warmup, x)
         loss_co = self.calc_loss(out, out_co, y_co_norm)
-        loss = loss_co.mean() 
+        loss = loss_co.mean()
 
         # Log prediction
         # Randomize shape
@@ -335,7 +333,11 @@ def main(args):
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
-    parser.add_argument("data_root", type=str, help="Location of the dataset to use for training and testing")
+    parser.add_argument(
+        "data_root",
+        type=str,
+        help="Location of the dataset to use for training and testing",
+    )
     parser.add_argument("--timesteps", type=int, default=40)
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--warmup", type=int, default=20)

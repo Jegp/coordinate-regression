@@ -1,4 +1,3 @@
-
 from typing import Dict, List, Tuple, Optional, Union
 from functools import reduce
 import torch
@@ -27,7 +26,7 @@ def register_li_parameters(
 
 
 class ANN(torch.nn.Module):
-    def __init__(self, kernels: int, classes: int):
+    def __init__(self, kernels: int, classes: int, kernel_size=11):
         super().__init__()
 
         # Set kernels
@@ -38,24 +37,46 @@ class ANN(torch.nn.Module):
         else:
             k1, k2, k3 = kernels
 
-        self.module = norse.Lift(torch.nn.Sequential(
-            torch.nn.Conv2d(1, k1, 9, bias=False, padding=4, stride=2),
-            (torch.nn.BatchNorm2d(k1)),
-            (torch.nn.ReLU()),
-            torch.nn.Dropout(0.1),
-            (torch.nn.Conv2d(k1, k2, 9, bias=False, padding=4, stride=1)),
-            (torch.nn.BatchNorm2d(k2)),
-            (torch.nn.ReLU()),
-            torch.nn.Dropout(0.1),
-            (torch.nn.Conv2d(k2, k3, 9, bias=False, padding=4, stride=1)),
-            (torch.nn.BatchNorm2d(k3)),
-            (torch.nn.ReLU()),
-            torch.nn.Dropout(0.1),
-            (torch.nn.ConvTranspose2d(k3, classes, 9, bias=False)),
-            (torch.nn.ReLU()),
-            torch.nn.Dropout(0.2),)
+        self.module = norse.Lift(
+            torch.nn.Sequential(
+                torch.nn.Conv2d(
+                    1, k1, kernel_size, bias=False, padding=kernel_size // 2, stride=2
+                ),
+                (torch.nn.BatchNorm2d(k1)),
+                (torch.nn.ReLU()),
+                torch.nn.Dropout(0.1),
+                (
+                    torch.nn.Conv2d(
+                        k1,
+                        k2,
+                        kernel_size,
+                        bias=False,
+                        padding=kernel_size // 2,
+                        stride=2,
+                    )
+                ),
+                (torch.nn.BatchNorm2d(k2)),
+                (torch.nn.ReLU()),
+                torch.nn.Dropout(0.1),
+                (
+                    torch.nn.Conv2d(
+                        k2,
+                        k3,
+                        kernel_size,
+                        bias=False,
+                        padding=kernel_size // 2,
+                        stride=1,
+                    )
+                ),
+                (torch.nn.BatchNorm2d(k3)),
+                (torch.nn.ReLU()),
+                torch.nn.Dropout(0.1),
+                (torch.nn.ConvTranspose2d(k3, classes, kernel_size, bias=False)),
+                (torch.nn.ReLU()),
+                torch.nn.Dropout(0.2),
+            )
         )
-        self.out_shape = (136, 136)
+        self.out_shape = (74, 74)
         self.spikes = None
 
     def forward(self, x, s=None):
@@ -79,13 +100,23 @@ class ANNRF(torch.nn.Module):
             m = norse.Lift(
                 torch.nn.Sequential(
                     torch.nn.Conv2d(
-                        1, n_rings, ring_size, bias=False, padding=4, stride=2
+                        1,
+                        n_rings,
+                        ring_size,
+                        bias=False,
+                        padding=ring_size // 2,
+                        stride=2,
                     ),
                     torch.nn.BatchNorm2d(n_rings),
                     torch.nn.ReLU(),
                     torch.nn.Dropout(0.1),
                     torch.nn.Conv2d(
-                        n_rings, n2_rings, ring_size, bias=False, padding=4, stride=1
+                        n_rings,
+                        n2_rings,
+                        ring_size,
+                        bias=False,
+                        padding=ring_size // 2,
+                        stride=2,
                     ),
                     torch.nn.BatchNorm2d(n2_rings),
                     torch.nn.ReLU(),
@@ -102,22 +133,27 @@ class ANNRF(torch.nn.Module):
             )
             rf_modules.append(m)
         self.rf_modules = torch.nn.ModuleList(rf_modules)
-        
+
         self.module2 = norse.Lift(
             torch.nn.Sequential(
                 torch.nn.Conv2d(
-                    n2_rings*len(rf_modules), 3 * classes, 9, bias=False, padding=4, stride=1
+                    n2_rings * len(rf_modules),
+                    3 * classes,
+                    ring_size,
+                    bias=False,
+                    padding="same",
+                    stride=1,
                 ),
                 torch.nn.BatchNorm2d(3 * classes),
                 torch.nn.ReLU(),
                 torch.nn.Dropout(0.1),
-                torch.nn.ConvTranspose2d(3 * classes, classes, 9, bias=False),
+                torch.nn.ConvTranspose2d(3 * classes, classes, ring_size, bias=False),
                 torch.nn.ReLU(),
                 torch.nn.Dropout(0.2),
             )
         )
 
-        self.out_shape = (136, 136)
+        self.out_shape = (74, 74)
         self.spikes = None
 
     def forward(self, x, s=None):
@@ -144,6 +180,7 @@ class ANNRF(torch.nn.Module):
         y, sc = self.classifier(y, sc)
         return y, (sr, sc)
 
+
 class ShapesSNNLayer(torch.nn.Module):
     def __init__(
         self,
@@ -152,9 +189,10 @@ class ShapesSNNLayer(torch.nn.Module):
         kernels: Union[int, torch.Size],
         classes: int,
         learn_parameters: bool = False,
+        kernel_size=11,
     ):
         super().__init__()
-        self.out_shape = (136, 136)
+        self.out_shape = (74, 74)
 
         # Set kernels
         if isinstance(kernels, int):
@@ -177,10 +215,10 @@ class ShapesSNNLayer(torch.nn.Module):
 
         # fmt: off
         self.module = norse.SequentialState(
-            *self.conv_block(1,  k1, 9, self.lif_p1, padding=4, stride=2),
-            *self.conv_block(k1, k2, 9, self.lif_p2, padding=4, stride=1),
-            *self.conv_block(k2, k3, 9, self.lif_p3, padding=4, stride=1),
-            torch.nn.ConvTranspose2d(k3, classes, 9, bias=False),
+            *self.conv_block(1,  k1, kernel_size, self.lif_p1, padding=kernel_size // 2, stride=2),
+            *self.conv_block(k1, k2, kernel_size, self.lif_p2, padding=kernel_size // 2, stride=2),
+            *self.conv_block(k2, k3, kernel_size, self.lif_p3, padding="same", stride=1),
+            torch.nn.ConvTranspose2d(k3, classes, kernel_size, bias=False),
             norse.LICell(p=self.li_p),
             torch.nn.Dropout(0.2),
         )
@@ -212,7 +250,8 @@ class ShapesSNNLayer(torch.nn.Module):
 class ShapesSNNRFLayer(torch.nn.Module):
     def __init__(self, li_p, lif_p, rf_file: str, classes: int):
         super().__init__()
-        self.out_shape = (136, 136)
+        self.shapes = [(64, 64), (74, 74)]
+        self.out_shape = self.shapes[-1]
 
         sigma = 10
         self.lif_p1 = self.lif_p2 = lif_p
@@ -236,10 +275,15 @@ class ShapesSNNRFLayer(torch.nn.Module):
 
             m = norse.SequentialState(
                 *self.conv_block(
-                    1, n_rings, ring_size, self.lif_p1, padding=4, stride=2
+                    1, n_rings, ring_size, self.lif_p1, padding=ring_size // 2, stride=2
                 ),
                 *self.conv_block(
-                    n_rings, n2_rings, ring_size, self.lif_p2, padding=4, stride=1
+                    n_rings,
+                    n2_rings,
+                    ring_size,
+                    self.lif_p2,
+                    padding=ring_size // 2,
+                    stride=2,
                 ),
             )
             # Load rings receptive fields
@@ -252,12 +296,12 @@ class ShapesSNNRFLayer(torch.nn.Module):
             *self.conv_block(
                 len(rf_modules) * rf_rest_size,
                 3 * classes,
-                9,
+                ring_size,
                 self.lif_p3,
-                padding=4,
+                padding="same",
                 stride=1,
             ),
-            torch.nn.ConvTranspose2d(3 * classes, classes, 9, bias=False),
+            torch.nn.ConvTranspose2d(3 * classes, classes, ring_size, bias=False),
             norse.LICell(p=self.li_p),
             torch.nn.Dropout(0.2),
         )
