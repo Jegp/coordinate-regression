@@ -269,7 +269,7 @@ class ShapesModel(pl.LightningModule):
 
 def train(args, callbacks=[]):
     torch.manual_seed(0)
-    args.resolution = (640, 480)
+    args.resolution = (256, 256)
 
     if args.mode == "single_triangle_top":
         data_offset = torch.tensor([0, -40])
