@@ -51,7 +51,7 @@ class ShapesModel(pl.LightningModule):
             method=method,
         )
         classes = 1 if single_class is not None else 3
-        kernels = (40, 20, 3)
+        kernels = (108, 72, 3)
         if net == "ann":
             self.net = ANN(kernels=kernels, classes=classes)
         elif net.startswith("annrf"):

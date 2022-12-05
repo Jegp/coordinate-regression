@@ -33,7 +33,7 @@ class DSNTLI(torch.nn.Module):
         self.probs_y = (
             torch.linspace(-1, 1, resolution[0]).repeat(resolution[1], 1).T.flatten()
         )
-        self.li_tm = torch.nn.Parameter(torch.tensor([0.99, 0.99]))
+        self.li_tm = torch.nn.Parameter(torch.tensor([0.9, 0.9]))
 
     def forward(self, x: torch.Tensor, state=None):
         if not x.device == self.probs_x.device:
