@@ -1,6 +1,6 @@
 <content>
 	<div class="head">
-		<video class="background" autoplay loop>
+		<video class="background" autoplay loop muted>
 			<source src="2209_event_video.mp4" type="video/mp4" />
 			<source src="2209_event_video.webm" type="video/webm" />
 		</video>
