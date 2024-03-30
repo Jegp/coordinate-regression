@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Please cite our work as below."cff-version: 1.2.0
+title: Translation and Scale Invariance for Event-Based Object tracking
+authors:
+  - family-names: Pedersen
+    given-names: Jens Egholm
+    orcid: https://orcid.org/0000-0001-6012-7415
+  - family-names: Singhal
+    given-names: Raghav
+    orcid: https://orcid.org/0000-0002-2104-8068
+  - family-names: Conradt
+    given-names: Jorg
+    orcid: https://orcid.org/0000-0001-5998-9640
+abstract: >
+  Without temporal averaging, such as rate codes, it remains challenging to train spiking neural networks for temporal regression tasks. In this work, we present a novel method to accurately predict spatial coordinates from event data with a fully spiking convolutional neural network (SCNN) without temporal averaging. Our method performs on-par with artificial neural networks (ANN) of similar complexity. Additionally, we demonstrate faster convergence in half the time using translation- and scale-invariant receptive fields. To permit comparison with conventional frame-based ANNs, we base our results on a simulated event-based dataset with an unrealistic high density. Therefore, we hypothesize that our method significantly outperform ANNs in settings with lower event density, as seen in real-life event-based data. Our model is fully spiking and can be ported directly to neuromorphic hardware.
+version: "2023"
+type: conference-paper
+identifier:
+  isbn: 978-1-4503-9947-0
+  doi: 10.1145/3584954.3584996
+url: https://dl.acm.org/doi/10.1145/3584954.3584996
+event:
+  name: Proceedings of the 2023 Annual Neuro-Inspired Computational Elements Conference
+  acronym: NICE '23
+  date: 2023-04
+  location: New York, NY, USA
+publisher:
+  name: Association for Computing Machinery
+citation: >
+  Pedersen, J. E., Singhal, R., & Conradt, J. (2023). Translation and Scale Invariance for Event-Based Object tracking. In Proceedings of the 2023 Annual Neuro-Inspired Computational Elements Conference (NICE ’23) (pp. 79–85). Association for Computing Machinery. https://doi.org/10.1145/3584954.3584996
