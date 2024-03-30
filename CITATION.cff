@@ -1,16 +1,16 @@
 cff-version: 1.2.0
 message: "Please cite our work as below."cff-version: 1.2.0
-title: Translation and Scale Invariance for Event-Based Object tracking
+title: "Translation and Scale Invariance for Event-Based Object tracking"
 authors:
-  - family-names: Pedersen
-    given-names: Jens Egholm
+  - family-names: "Pedersen"
+    given-names: "Jens Egholm"
     orcid: https://orcid.org/0000-0001-6012-7415
-  - family-names: Singhal
-    given-names: Raghav
+  - family-names: "Singhal"
+    given-names: "Raghav"
     orcid: https://orcid.org/0000-0002-2104-8068
-  - family-names: Conradt
-    given-names: Jorg
+  - family-names: "Conradt"
+    given-names: "Jorg"
     orcid: https://orcid.org/0000-0001-5998-9640
 doi: 10.1145/3584954.3584996
-url: https://dl.acm.org/doi/10.1145/3584954.3584996
+url: "https://dl.acm.org/doi/10.1145/3584954.3584996"
 date-released: 2023-04-12
