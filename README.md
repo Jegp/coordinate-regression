@@ -33,5 +33,23 @@ This work has been performed at the
 [Human Brain Project](https://www.humanbrainproject.eu/) and the
 [AI Pioneer Centre](https://www.aicentre.dk).
 
+Please cite the work as follows:
+
+```
+@inproceedings{Pedersen_Singhal_Conradt_2023,
+  address={New York, NY, USA},
+  series={NICE ’23},
+  title={Translation and Scale Invariance for Event-Based Object tracking},
+  ISBN={978-1-4503-9947-0},
+  url={https://dl.acm.org/doi/10.1145/3584954.3584996},
+  DOI={10.1145/3584954.3584996},
+  booktitle={Proceedings of the 2023 Annual Neuro-Inspired Computational Elements Conference}, publisher={Association for Computing Machinery}, author={Pedersen, Jens Egholm and Singhal, Raghav and Conradt, Jorg},
+  year={2023},
+  month=apr,
+  pages={79–85},
+  collection={NICE ’23}
+}
+```
+
 ## License
 This work is licensed under LGPLv3.
