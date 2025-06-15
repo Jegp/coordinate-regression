@@ -11,7 +11,7 @@ Specifically, we contribute:
 
 To train the models, follow the below steps
 
-1. [Download the dataset via this link](https://kth-my.sharepoint.com/:u:/g/personal/jeped_ug_kth_se/EZS0BB9N5AlAo9uB9aq0ssYB1bnFNO7JDfv1LpQTqGAy7w?e=DoFiJZ) and unpack it to a folder you can recall, say `/tmp/eventdata`.
+1. [Download the dataset via this link](https://cloud.jepedersen.dk/s/nXCTBLLS8ZgbQny) and unpack it to a folder you can recall, say `/tmp/eventdata`.
 2. Ensure you have a Python installation with [PyTorch](https://pytorch.org) and [Norse](https://github.com/norse/norse) installed.
    * After installing the necessary PyTorch version, you can install the dependencies from the `requirements.txt`-file by typing: `pip install -r requirements.txt`
 3. Enter the `coordinate-regression` folder and run the `learn_shapes.py` file with the dataset directory and model type to start training
